@@ -66,8 +66,11 @@ module pe_tb;
         clear_acc = 1;
         @(negedge clk);
         clear_acc = 0;
-        a_in = 8'd40;
-        b_in = 8'sd3;
+        a_in = 8'd128;
+        b_in = -8'sd128;
+        @(negedge clk);
+        a_in = 8'd84;
+        b_in = 8'sd1;
         #10;
         $finish;
     end

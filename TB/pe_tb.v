@@ -8,6 +8,7 @@ module pe_tb;
     // DUT inputs
     reg                   clk;
     reg                   rst;
+    reg                   enb;
     reg                   clear_acc;
     reg signed [DW-1:0]   a_in;
     reg signed [DW-1:0]   b_in;
@@ -24,6 +25,7 @@ module pe_tb;
     ) dut (
         .clk       (clk),
         .rst       (rst),
+        .enb       (enb),
         .clear_acc (clear_acc),
         .a_in      (a_in),
         .b_in      (b_in),
@@ -46,12 +48,13 @@ module pe_tb;
         clear_acc = 0;
         a_in      = 0;
         b_in      = 0;
-
+        enb       = 0;
         // Apply reset
         #12;
         rst = 0;
         
         @(negedge clk);
+        enb = 1;
         a_in = 8'd5;
         b_in = -8'sd2;
         #20;
@@ -71,6 +74,8 @@ module pe_tb;
         @(negedge clk);
         a_in = 8'd84;
         b_in = 8'sd1;
+        @(negedge clk);
+        enb = 0;
         #10;
         $finish;
     end

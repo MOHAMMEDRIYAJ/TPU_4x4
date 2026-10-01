@@ -4,6 +4,7 @@ module pe #(
 )(
     input                       clk,
     input                       rst,
+    input                       enb,
     input                       clear_acc,
 
     input        [DW-1:0]      a_in,      // Unsigned 8-bit
@@ -39,7 +40,7 @@ module pe #(
             // Accumulator
             if (clear_acc)
                 psum <= {AW{1'b0}};
-            else
+            else if(enb)
                 psum <= psum + 
                         ($signed({1'b0, a_in}) * b_in);
 

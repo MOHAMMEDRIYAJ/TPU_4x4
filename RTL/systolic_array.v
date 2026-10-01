@@ -5,6 +5,7 @@ module systolic_array #(
 )(
     input                          clk,
     input                          rst,
+    input                          enb,
     input                          clear_acc,
     input  signed [N*DW-1:0]       a_in_bus,
     input  signed [N*DW-1:0]       b_in_bus,
@@ -27,6 +28,7 @@ module systolic_array #(
                 pe #(.DW(DW), .AW(AW)) pe_inst (
                     .clk       (clk),
                     .rst       (rst),
+                    .enb       (enb),
                     .clear_acc (clear_acc),
                     .a_in      (a_link_flat[(gi*(N+1)+gj)*DW +: DW]),
                     .b_in      (b_link_flat[(gi*N+gj)*DW +: DW]),
